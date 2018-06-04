@@ -308,19 +308,39 @@ rlProblem = RL.RL(mdp,np.random.normal)
 
 # Test Q-learning
 reward = np.zeros([4,200])
+mean_reward = np.zeros([4,200])
+
 print('0.05')
-[Q,policy] = rlProblem.qLearning(s0=0,initialQ=np.zeros([mdp.nActions,mdp.nStates]),nEpisodes=400,nSteps=100,epsilon=0.05)
+Reward_all_trials = np.zeros([100,200])
+for trial in range(0,4):
+    [Q,policy,r] = rlProblem.qLearning(s0=0,initialQ=np.zeros([mdp.nActions,mdp.nStates]),nEpisodes=200,nSteps=100,epsilon=0.05)
+    Reward_all_trials[trial,:] = r
 #print(policy)
+mean_reward[0,:] = np.mean(Reward_all_trials,axis=0)
+
 
 print('0.1')
-[Q,policy] = rlProblem.qLearning(s0=0,initialQ=np.zeros([mdp.nActions,mdp.nStates]),nEpisodes=400,nSteps=100,epsilon=0.1)
+Reward_all_trials = np.zeros([100,200])
+for trial in range(0,4):
+    [Q,policy,r] = rlProblem.qLearning(s0=0,initialQ=np.zeros([mdp.nActions,mdp.nStates]),nEpisodes=200,nSteps=100,epsilon=0.1)
+    Reward_all_trials[trial,:] = r
 #print(policy)
+mean_reward[1,:] = np.mean(Reward_all_trials,axis=0)
+
 
 print('0.3')
-[Q,policy] = rlProblem.qLearning(s0=0,initialQ=np.zeros([mdp.nActions,mdp.nStates]),nEpisodes=400,nSteps=100,epsilon=0.3)
+Reward_all_trials = np.zeros([100,200])
+for trial in range(0,4):
+    [Q,policy,r] = rlProblem.qLearning(s0=0,initialQ=np.zeros([mdp.nActions,mdp.nStates]),nEpisodes=200,nSteps=100,epsilon=0.3)
+    Reward_all_trials[trial,:] = r
 #print(policy)
+mean_reward[2,:] = np.mean(Reward_all_trials,axis=0)
 
 print('0.5')
-[Q,policy] = rlProblem.qLearning(s0=0,initialQ=np.zeros([mdp.nActions,mdp.nStates]),nEpisodes=400,nSteps=100,epsilon=0.5)
+Reward_all_trials = np.zeros([100,200])
+for trial in range(0,4):
+    [Q,policy,r] = rlProblem.qLearning(s0=0,initialQ=np.zeros([mdp.nActions,mdp.nStates]),nEpisodes=200,nSteps=100,epsilon=0.5)
+    Reward_all_trials[trial,:] = r
 #print(policy)
+mean_reward[3,:] = np.mean(Reward_all_trials,axis=0)
 
