@@ -71,6 +71,14 @@ class RL:
                 else:
                     a = np.argmax(Q[:,s])
                 
+                if temperature > 0:
+                    # Boltzmann exploration
+                    boltzman = np.exp(Q[:,s]/temperature)
+                    boltzman = boltzman / np.sum(boltzman) # regularize 
+                    cumProb_boltzman = np.cumsum(boltzman)
+#                    print(cumProb_boltzman)
+                    a = np.where(cumProb_boltzman >= np.random.rand(1))[0][0]
+                
                 [r, next_state] = self.sampleRewardAndNextState(s,a)
                 done = next_state == 16
                 accu_rewards[ep] += r*np.power(self.mdp.discount,step)
